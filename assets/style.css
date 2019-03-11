@@ -5,5 +5,22 @@ body{
 .container{
     padding: 5%;
 }
-.Aggretsuko{
+.jumbotron{
+    background-image: linear-gradient(to bottom right, #c3cfe2, #f5f7fa);
 }
+.Question{
+    color: hotpink;
+    font-size: 20pt;
+}
+.btn{
+    border: 0px;
+}
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited{
+    background-color: hotpink;
+}
+#show-countdown{
+    margin: auto;
+    color: hotpink;
+    font-size: 50pt;
+}
+
