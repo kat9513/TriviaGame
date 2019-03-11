@@ -6,7 +6,7 @@ body{
     padding: 5%;
 }
 .jumbotron{
-    background-image: linear-gradient(to bottom right, #c3cfe2, #f5f7fa);
+    background: none;
 }
 .Question{
     color: hotpink;
@@ -14,6 +14,8 @@ body{
 }
 .btn{
     border: 0px;
+    width: 25%;
+    margin: auto;
 }
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited{
     background-color: hotpink;
@@ -22,5 +24,12 @@ body{
     margin: auto;
     color: hotpink;
     font-size: 50pt;
+}
+.correct, .incorrect{
+    color: hotpink;
+    font-size: 15pt;
+}
+.btn-danger{
+    background-color: red;
 }
 
