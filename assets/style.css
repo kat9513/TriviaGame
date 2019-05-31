@@ -1,13 +1,11 @@
-html{
+:root{
+    background: linear-gradient(to bottom right, #f5f7fa, #c3cfe2);
+    background-size: cover;
+    background-repeat: no-repeat;
     height: 100%;
 }
 body{
-    background-image: linear-gradient(to bottom right, #f5f7fa, #c3cfe2);
-    background-repeat: no-repeat;
-    min-height: 100%;
-}
-.container{
-    padding: 5%;
+    background-color: transparent;
 }
 .jumbotron{
     background: none;
