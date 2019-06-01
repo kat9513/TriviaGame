@@ -10,24 +10,56 @@ body{
     text-align: center;
     color: hotpink;
 }
+#logo{
+    margin-top: 10px;
+}
 #show-countdown{
     margin: auto;
     font-size: 50pt;
-    font-weight: 500;
+    font-weight: 100;
 }
-
+#wrapper{
+    text-align: center;
+}
 #sub-wrapper{
     display: inline-block;
     width: 50%;
     margin: 25px;
 }
 .q{
-    margin: 25px;
+    margin: 20px;
+}
+#button.btn{
+    width: 125px;
+    border-radius:0;
+    border: 2px solid hotpink;
+    margin: 5px;
+}
+#start.btn,
+#start-over.btn{
+    background: hotpink;
+    color: white;
+    width: 150px;
+    height: 50px;
+}
+.image{
+    text-align: center;
 }
 #Aggretsuko{
+    display: inline-block;
     position:fixed;
     bottom:0px;
-    left:50%;
+}
+@media only screen and (max-width: 800px){
+    #show-countdown{
+        font-size: 25pt;
+    }
+    #sub-wrapper{
+        width: 100%;
+    }
+    #Aggretsuko{
+        width: 150px;
+    }
 }
 
 

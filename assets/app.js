@@ -48,8 +48,8 @@ var game = {
         card.html("<h2 class='q'>" + questions[this.currentQuestion].question + "</h2>");
 
         for (var i = 0; i < questions[this.currentQuestion].answers.length; i++) {
-            card.append("<button class='answer-button' id='button' data-name='" + questions[this.currentQuestion].answers[i]
-                + "'>" + questions[this.currentQuestion].answers[i] + "</button>");
+            card.append("<button type='button' class='btn answer-button' id='button' data-name='" + questions[this.currentQuestion].answers[i]
+                + "'>" + questions[this.currentQuestion].answers[i] + "</button><br>");
         }
     },
 
@@ -88,7 +88,7 @@ var game = {
         card.append("<h3>Correct Answers: " + game.correct + "</h3>");
         card.append("<h3>Incorrect Answers: " + game.incorrect + "</h3>");
         card.append("<h3>Unanswered: " + (questions.length - (game.incorrect + game.correct)) + "</h3>");
-        card.append("<br><button id='start-over'>Start Over?</button>");
+        card.append("<br><button type='button' class='btn' id='start-over'>Start Over?</button>");
     },
 
     clicked: function (e) {
