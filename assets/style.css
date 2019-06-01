@@ -6,32 +6,28 @@
 }
 body{
     background-color: transparent;
-}
-.jumbotron{
-    background: none;
-}
-.Question{
+    height: 100%;
+    text-align: center;
     color: hotpink;
-    font-size: 20pt;
-}
-.btn{
-    border: 0px;
-    width: 25%;
-    margin: auto;
-}
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited{
-    background-color: hotpink;
 }
 #show-countdown{
     margin: auto;
-    color: hotpink;
     font-size: 50pt;
+    font-weight: 500;
 }
-.correct, .incorrect{
-    color: hotpink;
-    font-size: 15pt;
+
+#sub-wrapper{
+    display: inline-block;
+    width: 50%;
+    margin: 25px;
 }
-.btn-danger{
-    background-color: red;
+.q{
+    margin: 25px;
 }
+#Aggretsuko{
+    position:fixed;
+    bottom:0px;
+    left:50%;
+}
+
 

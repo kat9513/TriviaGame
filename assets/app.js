@@ -1,7 +1,7 @@
 
 var card = $("#quiz-area");
 
-var countStartNumber = 10;
+var countStartNumber = 20;
 
 //global variables
 var questions = [{
@@ -43,9 +43,9 @@ var game = {
 
     loadQuestion: function () {
 
-        timer = setInterval(game.countdown, 1000);
+        timer = setInterval(game.countdown, 2 * 1000);
 
-        card.html("<h2>" + questions[this.currentQuestion].question + "</h2>");
+        card.html("<h2 class='q'>" + questions[this.currentQuestion].question + "</h2>");
 
         for (var i = 0; i < questions[this.currentQuestion].answers.length; i++) {
             card.append("<button class='answer-button' id='button' data-name='" + questions[this.currentQuestion].answers[i]
@@ -70,10 +70,10 @@ var game = {
         card.append("<h3>The Correct Answer was: " + questions[this.currentQuestion].correctAnswer + "</h3>");
 
         if (game.currentQuestion === questions.length - 1) {
-            setTimeout(game.results, 1000);
+            setTimeout(game.results, 2 * 1000);
         }
         else {
-            setTimeout(game.nextQuestion, 1000);
+            setTimeout(game.nextQuestion, 2 * 1000);
         }
     },
 
@@ -112,10 +112,10 @@ var game = {
         card.append("<h3>The Correct Answer was: " + questions[game.currentQuestion].correctAnswer + "</h3>");
 
         if (game.currentQuestion === questions.length - 1) {
-            setTimeout(game.results, 1000);
+            setTimeout(game.results, 2 * 1000);
         }
         else {
-            setTimeout(this.nextQuestion, 1000);
+            setTimeout(this.nextQuestion, 2 * 1000);
         }
     },
 
@@ -128,10 +128,10 @@ var game = {
         card.html("<h2>Correct!</h2>");
 
         if (game.currentQuestion === questions.length - 1) {
-            setTimeout(game.results, 1000);
+            setTimeout(game.results, 2 * 1000);
         }
         else {
-            setTimeout(game.nextQuestion, 1000);
+            setTimeout(game.nextQuestion, 2 * 1000);
         }
     },
 
@@ -156,6 +156,6 @@ $(document).on("click", ".answer-button", function (e) {
 });
 
 $(document).on("click", "#start", function () {
-    $("#sub-wrapper").prepend("<h2>Time Remaining: <span id='show-countdown'>10</span> Seconds</h2>");
+    $("#sub-wrapper").prepend("<h2>Time Remaining: <span id='show-countdown'>20</span> Seconds</h2>");
     game.loadQuestion();
 });
