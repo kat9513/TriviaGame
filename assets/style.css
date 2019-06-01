@@ -58,7 +58,8 @@ body{
         width: 100%;
     }
     #Aggretsuko{
-        width: 150px;
+        width: 50px;
+        display: inline;
     }
 }
 
