@@ -1,123 +1,161 @@
-$(document).ready(function() {
+
+var card = $("#quiz-area");
+
+var countStartNumber = 10;
 
 //global variables
-var questions = ["What kind of animal is Retsuko?","Retsuko takes out her frustration by going to the kareoke bar and singing ____.","Retsuko bonds with two new friends, Washimi and Gori, at ____. ","Retsuko's star sign is _____."];
+var questions = [{
+    question: "What kind of animal is Retsuko?",
+    answers: ["Raccoon", "Red Panda", "Cat", "Fox"],
+    correctAnswer: "Red Panda"
+}, {
+    question: "Retsuko takes out her frustration by going to the kareoke bar and singing ____.",
+    answers: ["ABBA", "Country", "Adele", "Death Metal"],
+    correctAnswer: "Death Metal"
+}, {
+    question: "Retsuko bonds with two new friends, Washimi and Gori, at ____. ",
+    answers: ["Sunday Brunch", "Work", "Yoga Class", "The Spa"],
+    correctAnswer: "Yoga Class"
+}, {
+    question: "Retsuko's star sign is _____.",
+    answers: ["Scorpio", "Leo", "Aries", "Aquarius"],
+    correctAnswer: "Scorpio"
+}];
 
-var answers = [["Raccoon","Red Panda","Cat","Fox"],["ABBA","Country","Adele","Death Metal"],["Sunday Brunch","Work","Yoga Class","The Spa"],["Scorpio","Leo","Aries","Aquarius"]];
+var timer;
+//console.log(questions[0].answers);
 
-var correctAnswers = ["Red Panda","Death Metal","Yoga Class","Scorpio"];
+var game = {
+    questions: questions,
+    currentQuestion: 0,
+    counter: countStartNumber,
+    correct: 0,
+    incorrect: 0,
 
-var correctScore = 0;
+    countdown: function () {
+        game.counter--;
+        $("#show-countdown").text(game.counter);
+        if (game.counter === 0) {
+            console.log("TIME IS UP");
+            game.timeUp();
+        }
+    },
 
-var incorrectScore = 0;
+    loadQuestion: function () {
 
-var count = 0;
+        timer = setInterval(game.countdown, 1000);
 
-var Timer;
+        card.html("<h2>" + questions[this.currentQuestion].question + "</h2>");
 
-var timelimit = 10;
+        for (var i = 0; i < questions[this.currentQuestion].answers.length; i++) {
+            card.append("<button class='answer-button' id='button' data-name='" + questions[this.currentQuestion].answers[i]
+                + "'>" + questions[this.currentQuestion].answers[i] + "</button>");
+        }
+    },
 
-var audio = document.createElement("audio");
+    nextQuestion: function () {
+        game.counter = countStartNumber;
+        $("#show-countdown").text(game.counter);
+        game.currentQuestion++;
+        game.loadQuestion();
+    },
 
-audio.setAttribute("src", "assets/Aggretsuko.mp3");
+    timeUp: function () {
 
-// Create a function that creates the start button and initial screen
-function startPage(){
-    firstScreen = "<p class='text-center main-button-container'><a class='btn btn-primary btn-lg btn-block start-button' href='#' role='button'>Start Quiz</a></p>";
-    $(".Question").html(firstScreen);
-}
+        clearInterval(timer);
 
-startPage();
+        $("#show-countdown").html(game.counter);
+
+        alert("Time's Up!");
+        card.append("<h3>The Correct Answer was: " + questions[this.currentQuestion].correctAnswer + "</h3>");
+
+        if (game.currentQuestion === questions.length - 1) {
+            setTimeout(game.results, 1000);
+        }
+        else {
+            setTimeout(game.nextQuestion, 1000);
+        }
+    },
+
+    results: function () {
+
+        clearInterval(timer);
+
+        card.html("<h2>Final Score</h2>");
+
+        $("#show-countdown").text(game.counter);
+
+        card.append("<h3>Correct Answers: " + game.correct + "</h3>");
+        card.append("<h3>Incorrect Answers: " + game.incorrect + "</h3>");
+        card.append("<h3>Unanswered: " + (questions.length - (game.incorrect + game.correct)) + "</h3>");
+        card.append("<br><button id='start-over'>Start Over?</button>");
+    },
+
+    clicked: function (e) {
+        clearInterval(timer);
+        if ($(e.target).attr("data-name") === questions[this.currentQuestion].correctAnswer) {
+            this.answeredCorrectly();
+        }
+        else {
+            this.answeredIncorrectly();
+        }
+    },
+
+    answeredIncorrectly: function () {
+
+        game.incorrect++;
+
+        clearInterval(timer);
 
 
-//is it correct or incorrect
+        card.html("<h2>Wrong!</h2>");
+        card.append("<h3>The Correct Answer was: " + questions[game.currentQuestion].correctAnswer + "</h3>");
 
-function nextQuestion(){
-    count++;
-    if(count == questions.length) {
-        endGame();
+        if (game.currentQuestion === questions.length - 1) {
+            setTimeout(game.results, 1000);
+        }
+        else {
+            setTimeout(this.nextQuestion, 1000);
+        }
+    },
+
+    answeredCorrectly: function () {
+
+        clearInterval(timer);
+
+        game.correct++;
+
+        card.html("<h2>Correct!</h2>");
+
+        if (game.currentQuestion === questions.length - 1) {
+            setTimeout(game.results, 1000);
+        }
+        else {
+            setTimeout(game.nextQuestion, 1000);
+        }
+    },
+
+    reset: function () {
+        this.currentQuestion = 0;
+        this.counter = countStartNumber;
+        this.correct = 0;
+        this.incorrect = 0;
+        this.loadQuestion();
     }
-    else{
-        Question();
-    }    
-
 }
 
-function Restart(){
-    correctScore = 0;
-    incorrectScore = 0;
-    count = 0;
-    audio.pause();
-    Question();
-}
 
-function endGame(){
-    $("#show-countdown").html("");
-    $(".Question").html("GAME OVER")
-    $("#1").html("Correct Score: "+correctScore);
-    $("#2").html("Incorrect Score: "+incorrectScore);
-    $("#3").html("");
-    playAgain = "<p class='text-center main-button-container'><a class='btn btn-danger btn-lg btn-block start-button' href='#' role='button'>Play Again</a></p>";
-    $("#4").html(playAgain);
-    $("#4").off("click").on("click", Restart);
-    $("#Aggretsuko").attr("src", "assets/images/AggretsukoRage.png");
-    audio.play();
-    
-    
-}
+//click events
 
-function startTimer(){
-    //Timer = setInterval(nextQuestion, 10000);
-    timelimit--;
-    $("#show-countdown").text(timelimit);
-    if(timelimit === 0){
-    clearInterval(Timer);
-    timelimit=10;
-    incorrectScore++;
-    nextQuestion();
-    }
-};
+$(document).on("click", "#start-over", function () {
+    game.reset();
+});
 
+$(document).on("click", ".answer-button", function (e) {
+    game.clicked(e);
+});
 
-//add functionality to the start button
-function Question (){
-    $("#Aggretsuko").attr("src", "assets/images/AggretsukoNice.gif");
-    $(".Question").html(questions[count]);
-    firstButton ="<p class='text-center main-button-container'><a class='btn btn-primary btn-lg btn-block start-button' href='#' role='button'>" + answers[count][0] + "</a></p>";
-    $("#1").html(firstButton);
-    secondButton ="<p class='text-center main-button-container'><a class='btn btn-primary btn-lg btn-block start-button' href='#' role='button'>" + answers[count][1] + "</a></p>";
-    $("#2").html(secondButton);
-    thirdButton ="<p class='text-center main-button-container'><a class='btn btn-primary btn-lg btn-block start-button' href='#' role='button'>" + answers[count][2] + "</a></p>";
-    $("#3").html(thirdButton);
-    fourthButton ="<p class='text-center main-button-container'><a class='btn btn-primary btn-lg btn-block start-button' href='#' role='button'>" + answers[count][3] + "</a></p>";
-    $("#4").html(fourthButton);
-    Timer = setInterval(startTimer, 1000);
-   
-}
-$(".start-button").click(Question);
-
-//generate wins and losses
-
-
-$(".buttons").on("click", function(event){
-var userChoice = $(this).text();
-if(userChoice === correctAnswers[count]){
-    correctScore ++;
-}
-    
-else{
-    incorrectScore++;
-}
-clearInterval(Timer);
-timelimit=10;
-nextQuestion();
-console.log(correctScore);
-console.log(incorrectScore);
-
-
-})
-
-
-
-
+$(document).on("click", "#start", function () {
+    $("#sub-wrapper").prepend("<h2>Time Remaining: <span id='show-countdown'>10</span> Seconds</h2>");
+    game.loadQuestion();
 });

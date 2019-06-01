@@ -7,39 +7,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Trivia Game</title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <script type="text/javascript" src="assets/app.js"></script>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
     <link rel="stylesheet" type="text/css" href="assets/style.css">
 </head>
 
 <body>
     <h1 class="text-center"><img src="assets/images/Aggretsuko Logo.png" alt=""></h1>
-
-    <div class="card col-md-offset-2 col-md-8">
-        <div class="row text-center">
-            <div id="show-countdown"></div>
-        </div>
-        <div class="row">
-            <div class="card-body">
-                <h5 class="Question text-center">Question</h5>
-
-                <p class="buttons text-center correct" id="1"></p>
-                <p class="buttons text-center incorrect" id="2"></p>
-                <p class="buttons text-center" id="3"></p>
-                <p class="buttons text-center" id="4"></p>
-
-                <div>
-                </div>
-                <div class="row">
-                    <img class="center-block" id="Aggretsuko" src="assets/images/AggretsukoNice.gif" alt="">
-                </div>
+    <div id="wrapper">
+        <div id="sub-wrapper">
+            <div id="quiz-area">
+                <button id="start">Start</button>
             </div>
         </div>
+        <img class="center-block" id="Aggretsuko" src="assets/images/AggretsukoNice.gif" alt="">
+
     </div>
+    <script type="text/javascript" src="assets/app.js"></script>
+
 </body>
 
 </html>
