@@ -15,7 +15,7 @@ body{
 }
 #show-countdown{
     margin: auto;
-    font-size: 50pt;
+    font-size: 25pt;
     font-weight: 300;
 }
 #wrapper{
@@ -53,6 +53,9 @@ body{
     z-index: -1;
 }
 @media only screen and (max-width: 800px){
+    body{
+        font-size: 25pt;
+    }
     #show-countdown{
         font-size: 25pt;
     }
@@ -60,8 +63,7 @@ body{
         width: 100%;
     }
     #Aggretsuko{
-        float: left;
-        width: 25%;
+        display: none;
     }
 }
 
